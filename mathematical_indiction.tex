@@ -1,0 +1,134 @@
+\documentclass[11pt]{article}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\usepackage[headheight=0pt,headsep=0pt]{geometry}
+\addtolength{\topmargin}{-60pt}
+\addtolength{\textheight}{120pt}
+\usepackage{multicol}
+\newtheorem*{General Definition}{General Definition}
+\newtheorem*{Exercise}{Exercise}
+\newtheorem*{remark}{Remark}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem*{claim}{Claim}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\newcommand{\twopartdef}[4]
+{
+	\left \{
+		\begin{array}{lll}
+			#1 & \mbox{,}\;\; #2 \\
+			#3 & \mbox{,} \;\;#4 
+		\end{array}
+	\right.
+}
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+\begin{document}
+\title{Mathematical Induction}
+\author{Yosra Hashim}
+\date{}
+\maketitle
+
+\section*{General Definition}
+Mathematical induction is a method of developing a mathematical proof that shows that for all $\ n \in \mathbb{N},$ a statement $P(n)$ holds true.
+ 
+i.e. for $n= 0,1,2,3,\dots,\  P(0), P(1), P(2),P(3),\dots$ respectively are true.
+\section*{Steps of Induction}
+\begin{itemize}
+	\item Step 1 (Base Case/Basis): 
+ Prove that the statement is true for an initial value.
+\item Step 2 (Induction):
+Prove that if the statement is true for any $n,$ then it must be true for $n+1.$
+\end{itemize}
+\section*{Proofs Using Induction}
+\subsection*{Weak Induction} 
+Prove the derivative power rule ($\frac{d}{dx} (x^n) = nx^{n-1}, \ n\in \mathbb{N}, \ n>0)$
+\begin{itemize}
+\item Assuming the following: 
+\begin{itemize}
+	\item Derivative Product Rule: $\frac{d}{dx} (f(x).g(x)) = \frac{d}{dx}(f(x)) . g(x) + \frac{d}{dx}(g(x)) . f(x)$
+	\item $x^0=1$ because $1= \frac {x^n}{x^n}=x^{n-n}=x^0$ *
+\end{itemize}
+\item Step 1 (Basis): Prove $\frac{d}{dx}(x^n)=nx^{n-1}$ for $n=1,$ \ i.e. $\frac{d}{dx}(x^1)=1.x^{1-1}.$
+\begin{multicols}{2}
+L.H.S.
+$$\frac{d}{dx}(x^1)= \lim_{h \rightarrow 0}{\frac{(x+h)-(x)}{h}}
+				 = \lim_{h \rightarrow 0}{\frac{h}{h}}
+				 = 1$$
+
+\columnbreak
+\ \ \ \ \ \ \ \ \ \ \ \ R.H.S. 
+$$1x^{1-1}=  x^0
+		= 1 \ \text{ by *} $$ 
+\end{multicols}
+
+\item Step 2 (Induction): Assume that for $n=k,\ \ \frac {d}{dx} (x^k)= k x^{k-1}.$ 
+\newline Prove that for $n=k+1, \ \ \frac {d}{dx} (x^{k+1})=(k+1)x^{(k+1)-1}.$
+\begin{multicols}{2}
+L.H.S.
+\begin{align*}
+\frac{d}{dx}(x^{k+1})= &\frac{d}{dx}(x^{k}.x)\\
+				 = & \frac{d}{dx}(x^{k}).x +\frac{d}{dx}(x).x^{k}\\
+				 = & kx^{k-1}.x +1.x^k \\
+				 = & kx^{k} +x^k = (k+1)x^k
+\end{align*}
+
+\columnbreak
+\ \ \ \ \ \ \  \ R.H.S. 
+\begin{align*}
+(k+1)x^{(k+1)-1}=(k+1)x^k
+\end{align*}
+\end{multicols}
+L.H.S.=R.H.S. \ \ \ \ \ QED
+\end{itemize}
+\subsection*{Strong Induction}
+Prove that $\sqrt{2}$ is irrational.
+i.e. prove $\sqrt{2} \neq \frac{n}{b}$ for any integer $b.$
+\begin{itemize}
+	\item Step 1 (Basis):
+			Prove $\sqrt{2} \neq \frac{1}{b}:$ true because $\sqrt{2} >1>\frac{1}{b}$ for all positive integer $b.$
+	\item Step 2 (Induction):
+			Assume $\sqrt{2} \neq \frac{n}{b}$ for $n=1, \dots,k$ for an arbitrary positive int. $k.$ Prove $\sqrt{2} \neq \frac{k+1}{b}$ for all positive integer $b.$
+			\newline
+			Assume, by contradiction, that $\sqrt{2} = \frac{k+1}{b}$ for some positive integer $b.$ So: $$2b^2=(k+1)^2.$$ Therefore, $(k+1)^2$ is even, and $(k+1)$ is even. This is because the square of an integer is even only if the integer is even.
+			Since $(k+1)$ is even, then $(k+1)=2p$ for some integer $p.$ So: 
+			\begin{align*}
+			   (k+1)^2= & 4p^2\\
+			   2b^2 =& 4p^2\\
+			   b^2= & 2p^2	
+			\end{align*}
+			So $b^2$ is even, and $b$ is even for the same reason above.
+			Since $b$ is even, then $b=2q$ for some integer $q.$
+			Therefore, $\sqrt {2} = \frac {k+1}{b}=\frac {2p}{2q}=\frac {p}{q},$ so the statement $\sqrt{2} \neq \frac{n}{b}$ is false for $n=p.$ *
+			But $p<(k+1)$ so $p\leq k.$ But by induction assumption, $\sqrt{2} \neq \frac{n}{b}$ is true for $n=p.$ *
+			\newline
+			* give contradiction. 
+			Therefore $\sqrt{2} \neq \frac{k+1}{b}$ is true for all positive integer $b.$
+			\end{itemize}
+			\textbf{Conclusion:} Therefore $\sqrt{2} \neq \frac{n}{b}$ is true for all natural number $n.$
+			Therefore, $\sqrt{2}$ is irrational. QED.
+\section*{Real World Applications}
+	Mathematical induction does not have many direct real-world applications, however a few include: explaining the idea of dominoes, an elegant solution to the Tower of Hanoi, and an infinite, linear rumour. Aside from direct real world applications, mathematical induction is very noteworthy in its ability to prove mathematical ideas, which themselves have real world applications. For example, the derivative power rule we proved earlier can be applied in business calculus, in problems involving power functions and related rates.	
+\section*{Common Questions and Answers}
+	\begin{enumerate}	
+		\item Is mathematical induction limited to proofs for$\ n \in \mathbb{N}$?
+		\newline No, mathematical induction can be modified in order to expand the number sets it proves for. For example, we could modify our derivative power rule proof to prove for all $\ n \in \mathbb{I}$ by doing another base case for $\ n = 1$ and doing an inductive step proving for $\ n-1$.
+		\item How did mathematical induction come about?
+		\newline The logic of mathematical induction was first used in 370 BC by Plato. At that point, it had no explicit steps, but followed the same idea. Over time, this proving technique has been used to solve various problems (e.g. Sorites paradox). Then, by 1665, Pascal used mathematical induction in one of his works, making the basic two steps explicit. Since then, mathematical induction following the basis and induction strategy has proven to be very effective.
+	\end{enumerate}
+
+ 		
+
+%
+%
+
+\end{document}
